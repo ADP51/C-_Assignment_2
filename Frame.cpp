@@ -37,7 +37,8 @@ Version:		1.0
 Author:			Andrew Palmer
 ************************************************/
 Frame::Frame(char* frameName, double duration){
-	this->frameName = frameName;
+	this->frameName = new char[strlen(frameName) + 1]; //allocate the size needed for the frameName
+	strcpy_s(this->frameName, strlen(frameName) + 1, frameName); // copy the frameName to the new object
 	this->duration = duration;
 }
 
@@ -51,7 +52,8 @@ Version:		1.0
 Author:			Andrew Palmer
 ************************************************/
 Frame::Frame(const Frame& copiedFrame) {
-	this->frameName = copiedFrame.frameName;
+	this->frameName = new char[strlen(copiedFrame.frameName) + 1]; //allocate the size needed for the frameName
+	strcpy_s(this->frameName, strlen(copiedFrame.frameName) + 1 , copiedFrame.frameName); // copy the frameName to the new object
 	this->duration = copiedFrame.duration;
 }
 
@@ -79,10 +81,11 @@ Author:			Andrew Palmer
 ************************************************/
 Frame& Frame::operator=(const Frame& frame)
 {
-	delete(this->frameName);
-	this->frameName = new char[strlen(frame.frameName)];
+	delete[] this->frameName; // delete the old frameName
+	this->frameName = new char[strlen(frame.frameName) + 1]; //allocate the size needed for the new name
+	strcpy_s(this->frameName, strlen(frame.frameName) + 1, frame.frameName); // copy it over
 	this->duration = frame.duration;
-	return *this;
+	return *this; //returns pointer to the object
 }
 
 /***********************************************
@@ -95,6 +98,6 @@ Version:		1.0
 Author:			Andrew Palmer
 ************************************************/
 ostream& operator<<(ostream& out, Frame& frame) {
-	cout << "frameName = " << frame.frameName << "; duration = " << frame.duration << endl;
+	out << "frameName = " << frame.frameName << "; duration = " << frame.duration;
 	return out;
 }
