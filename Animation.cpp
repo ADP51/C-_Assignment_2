@@ -35,8 +35,13 @@ Version:		1.0
 Author:			Andrew Palmer
 ************************************************/
 void Animation::DeleteFrame() {
-	this->frames.pop_front(); // delete the head of the forward list
-	cout << "First frame deleted" << endl;
+	if (this->frames.empty()) {
+		cout << "No frames to delete" << endl;
+	}
+	else {
+		this->frames.pop_front(); // delete the head of the forward list
+		cout << "First frame deleted" << endl;
+	}
 }
 
 /***********************************************
@@ -133,7 +138,7 @@ istream& operator>>(istream& in, Animation& animation) {
 	char* newName = new char[name.length()]; // allocate size of char[]
 	name.copy(newName, name.length(), 0); // copy the string into char[]
 	Frame newFrame(newName, duration); 
-	animation.frames.emplace_front(newFrame); // place new frame at the front of the forward list
+	animation.frames.push_front(newFrame); // place new frame at the front of the forward list
 	cout << "Frame " << newName << " added at the front of frames" << endl;
 	return in;
 }

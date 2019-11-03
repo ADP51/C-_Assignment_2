@@ -68,6 +68,7 @@ Author:			Andrew Palmer
 ************************************************/
 Frame::~Frame() {
 	delete[] frameName;
+	duration = NULL;
 }
 
 /***********************************************
