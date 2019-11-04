@@ -67,8 +67,7 @@ Version:		1.0
 Author:			Andrew Palmer
 ************************************************/
 Frame::~Frame() {
-	delete[] frameName;
-	duration = NULL;
+	delete(frameName);
 }
 
 /***********************************************
@@ -82,7 +81,7 @@ Author:			Andrew Palmer
 ************************************************/
 Frame& Frame::operator=(const Frame& frame)
 {
-	delete[] this->frameName; // delete the old frameName
+	delete(this->frameName); // delete the old frameName
 	this->frameName = new char[strlen(frame.frameName) + 1]; //allocate the size needed for the new name
 	strcpy_s(this->frameName, strlen(frame.frameName) + 1, frame.frameName); // copy it over
 	this->duration = frame.duration;

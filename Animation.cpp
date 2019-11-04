@@ -136,10 +136,10 @@ istream& operator>>(istream& in, Animation& animation) {
 
 	name = name + '\0'; // add string terminating symbol for char[] before copying over
 	char* newName = new char[name.length()]; // allocate size of char[]
-	name.copy(newName, name.length(), 0); // copy the string into char[]
-	Frame newFrame(newName, duration); 
-	animation.frames.push_front(newFrame); // place new frame at the front of the forward list
+	name.copy(newName, name.length(), 0); // copy the string into char[] 
+	animation.frames.push_front(Frame(newName, duration)); // place new frame at the front of the forward list
 	cout << "Frame " << newName << " added at the front of frames" << endl;
+	delete(newName);
 	return in;
 }
 
